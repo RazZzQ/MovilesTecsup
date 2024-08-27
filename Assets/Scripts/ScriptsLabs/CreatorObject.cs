@@ -9,24 +9,81 @@ public class CreatorObject : MonoBehaviour
 {
     [SerializeField] SelectorManager selectorManager;
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Collider2D squareCollider;
+    [SerializeField] LayerMask layer;
+    private float tapCount;
+    private bool canClick;
+    private GameObject newObject;
+    Vector3 TouchPosition;
+    RaycastHit hit;
+
     public void AsignateObject(Vector3 victim)
     {
         if(selectorManager != null)
         {
             spriteRenderer.sprite = selectorManager.character.gameObject.GetComponent<SpriteRenderer>().sprite;
             spriteRenderer.color = selectorManager.color;
-            GameObject newObject = Instantiate(spriteRenderer.gameObject, victim, Quaternion.identity); // Crear en la posición
+            newObject = Instantiate(spriteRenderer.gameObject, victim, Quaternion.identity);
             newObject.transform.localScale = new Vector3(1, 1, 1);
         }
     }
     public void createObject()
     {
-        if (Input.touchCount > 0) 
+        if (Input.touchCount > 0)
         {
             Touch MiTouch = Input.GetTouch(0);
-            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(MiTouch.position.x, MiTouch.position.y, 10)); // Ajusta el valor z según sea necesario.
-            AsignateObject(touchPosition);
+            TouchPosition = Camera.main.ScreenToWorldPoint(new Vector3(MiTouch.position.x, MiTouch.position.y, 10));
+            if (canClick)
+            {
+                if (IsMouseOverSquare(TouchPosition))
+                {
+                    AsignateObject(TouchPosition);
+                }
+                canClick = false;
+            }
         }
+        else
+        {
+            canClick = true;
+        }
+    }
+    public void DeleteObject()
+    {
+        
+            if (Input.touchCount == 1)
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                    tapCount++;
+                }
+                if(Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    if (tapCount == 2 && selectorManager.MouseFree == true)
+                    {
+                        Debug.Log("wasaa");
+
+                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layer);
+
+                        // Dibuja el rayo para depuración (solo se ve en el editor).
+                        Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Color.green, 10f);
+
+                        if (hit.collider != null)
+                        {
+                            if (hit.collider.CompareTag("Victim"))
+                            {
+                                Debug.Log("wasaa");
+                            }
+                        }
+                    tapCount = 0;
+                    }
+                }
+            }
+        
+    }
+    bool IsMouseOverSquare(Vector2 position)
+    {
+        return squareCollider.OverlapPoint(position);
     }
     void Awake()
     {
@@ -34,11 +91,12 @@ public class CreatorObject : MonoBehaviour
     }
     public void loadComponent()
     {
+        canClick = true;
         //spriteRenderer = selectorManager.character.gameObject.GetComponent<SpriteRenderer>();
     }
-    // Update is called once per frame
     void Update()
     {
         createObject();
+        DeleteObject();
     }
 }

@@ -15,11 +15,6 @@ public class UIManager : MonoBehaviour
     private Vector3 PanelVelocityCharacters = new Vector3(0,1,0);
     private Vector3 PanelVelocityColors = new Vector3(1,0,0);
 
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-    }   
     public void PanelCharactersAnimation()
     {
         PanelCharacters.GetComponent<RectTransform>().localPosition = Vector3.SmoothDamp(PanelCharacters.localPosition, VictimPointPanelCharacters, 
@@ -39,7 +34,7 @@ public class UIManager : MonoBehaviour
         PanelColors.GetComponent<RectTransform>().localPosition = Vector3.SmoothDamp(PanelColors.localPosition, VictimPointPanelColors,
                                                            ref PanelVelocityColors, 0.5f);
     }
-    
+        
     // Update is called once per frame
     void Update()
     {

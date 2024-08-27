@@ -8,6 +8,7 @@ public class SelectorManager : MonoBehaviour
     public GameObject[] ButtonTest;
     public Color color;
     public GameObject character;
+    public bool MouseFree = true;
     public void SelectorCharacter(string Character)
     {
         if(Character == "pj1")
@@ -34,6 +35,7 @@ public class SelectorManager : MonoBehaviour
         {
             character = ButtonTest[5].transform.GetChild(0).gameObject;
         }
+        MouseFree = false;
     }
     public void SelectorColor(string victim)
     {
@@ -54,6 +56,10 @@ public class SelectorManager : MonoBehaviour
         {
             color = new Color(1.0f, 0.64f, 0.0f);
         }
-
+    }
+    public void CleanCharacterandColor()
+    {
+        MouseFree = true;
+        character = null;
     }
 }
