@@ -58,20 +58,21 @@ public class CreatorObject : MonoBehaviour
                 }
                 if(Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
-                    if (tapCount == 2 && selectorManager.MouseFree == true)
+                    if (tapCount == 2)
                     {
-                        Debug.Log("wasaa");
+                        Debug.Log("adwas");
 
                         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layer);
-
+                        Debug.Assert((hit.collider == null));
                         // Dibuja el rayo para depuración (solo se ve en el editor).
                         Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Color.green, 10f);
 
                         if (hit.collider != null)
                         {
-                            if (hit.collider.CompareTag("Victim"))
+                            if (hit.collider.gameObject.CompareTag("Victim"))
                             {
+                                Destroy(newObject);
                                 Debug.Log("wasaa");
                             }
                         }
