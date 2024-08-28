@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4722475056242078910}
   - component: {fileID: 6365348321487639774}
   - component: {fileID: -4368528741944175557}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Personajes3
   m_TagString: Victim
   m_Icon: {fileID: 0}

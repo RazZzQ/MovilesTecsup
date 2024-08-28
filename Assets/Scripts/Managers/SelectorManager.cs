@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -11,6 +12,9 @@ public class SelectorManager : MonoBehaviour
     public bool MouseFree = true;
     public void SelectorCharacter(string Character)
     {
+        try
+        {
+
         if(Character == "pj1")
         {
             character = ButtonTest[0].transform.GetChild(0).gameObject;
@@ -34,6 +38,11 @@ public class SelectorManager : MonoBehaviour
         else if(Character == "pj6")
         {
             character = ButtonTest[5].transform.GetChild(0).gameObject;
+        }
+        }
+        catch
+        {
+            Debug.LogError("");    
         }
         MouseFree = false;
     }

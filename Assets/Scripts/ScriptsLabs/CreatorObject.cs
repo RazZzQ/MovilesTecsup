@@ -11,12 +11,15 @@ public class CreatorObject : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Collider2D squareCollider;
     [SerializeField] LayerMask layer;
-    private float tapCount;
+    public int tapCount;
     private bool canClick;
     private GameObject newObject;
     Vector3 TouchPosition;
-    RaycastHit hit;
-
+    private bool isDragging = false;
+    private GameObject selectedObject = null;
+    private Vector2 startSwipePosition;
+    private Vector3 touchPosition;
+    private TrailRenderer trail;
     public void AsignateObject(Vector3 victim)
     {
         if(selectorManager != null)
@@ -49,38 +52,100 @@ public class CreatorObject : MonoBehaviour
     }
     public void DeleteObject()
     {
-        
-            if (Input.touchCount == 1)
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+
+            // Verificar si se ha tocado el Collider2D del objeto
+            if (selectorManager.character == null)
             {
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                if (touch.phase == TouchPhase.Began)
                 {
-                    tapCount++;
+                    if (squareCollider.OverlapPoint(touchPosition))
+                    {
+                        tapCount++;
+                    }
                 }
-                if(Input.GetTouch(0).phase == TouchPhase.Ended)
+
+                if (touch.phase == TouchPhase.Ended)
                 {
                     if (tapCount == 2)
                     {
-                        Debug.Log("adwas");
-
-                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layer);
-                        Debug.Assert((hit.collider == null));
-                        // Dibuja el rayo para depuración (solo se ve en el editor).
-                        Debug.DrawRay(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Color.green, 10f);
-
-                        if (hit.collider != null)
-                        {
-                            if (hit.collider.gameObject.CompareTag("Victim"))
-                            {
-                                Destroy(newObject);
-                                Debug.Log("wasaa");
-                            }
-                        }
-                    tapCount = 0;
+                        // Aquí se eliminaría el objeto
+                        Debug.Log("Objeto eliminado");
+                        tapCount = 0;
                     }
                 }
             }
-        
+        }
+    }
+    public void DetectDragAndSwipe()
+    {
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (squareCollider.OverlapPoint(touchPosition))
+                {
+                    selectedObject = squareCollider.gameObject;
+                    isDragging = true;
+                }
+
+                startSwipePosition = touchPosition;
+
+                if (trail != null)
+                {
+                    trail.transform.position = startSwipePosition;
+                    trail.enabled = true;
+                }
+            }
+            
+            if (touch.phase == TouchPhase.Moved && isDragging && selectedObject != null)
+            {
+                selectedObject.transform.position = touchPosition;
+            }
+
+            if (touch.phase == TouchPhase.Ended)
+            {
+                if (trail != null)
+                {
+                    trail.enabled = false;
+                }
+
+                if (isDragging)
+                {
+                    selectedObject = null;
+                    isDragging = false;
+                }
+                else
+                {
+                    Vector2 endSwipePosition = touchPosition;
+                    Vector2 swipeDirection = endSwipePosition - startSwipePosition;
+
+                    if (swipeDirection.magnitude > 0.5f)
+                    {
+                        // Detecta un Swipe, elimina todos los objetos
+                        DeleteAllObjects();
+                    }
+                }
+            }
+        }
+    }
+
+    void DeleteAllObjects()
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("InstantiatedObject");
+
+        for (int i = 0; i < objects.Length; i++)
+        {
+            Destroy(objects[i]);
+        }
+
+        Debug.Log("Todos los objetos han sido eliminados.");
     }
     bool IsMouseOverSquare(Vector2 position)
     {
@@ -93,11 +158,11 @@ public class CreatorObject : MonoBehaviour
     public void loadComponent()
     {
         canClick = true;
-        //spriteRenderer = selectorManager.character.gameObject.GetComponent<SpriteRenderer>();
     }
     void Update()
     {
         createObject();
         DeleteObject();
+        //DetectDragAndSwipe();
     }
 }
