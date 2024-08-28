@@ -114,7 +114,7 @@ public void Dobject()
         }
         void DeleteAllObjects()
         {
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PokeBall"))
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Victim"))
             {
                 Destroy(obj);
             }
@@ -181,6 +181,6 @@ public void Dobject()
     {
         createObject();
         Dobject();
-        useVoid();
+        //useVoid();
     }
 }
