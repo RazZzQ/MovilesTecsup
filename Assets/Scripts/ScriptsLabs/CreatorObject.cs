@@ -45,10 +45,10 @@ public class CreatorObject : MonoBehaviour
             TouchPosition = Camera.main.ScreenToWorldPoint(new Vector3(MiTouch.position.x, MiTouch.position.y, 10));
             if (canClick)
             {
+                if (IsMouseOverSquare(TouchPosition))
+                {
                     AsignateObject(TouchPosition);
-                //if (IsMouseOverSquare(TouchPosition))
-                //{
-                //}
+                }
                 canClick = false;
             }
         }
@@ -59,112 +59,56 @@ public class CreatorObject : MonoBehaviour
     }
 public void Dobject()
 {
-    if (Input.touchCount == 1)
-    {
+   if(selectorManager.MouseFree)
+   {
+        if (Input.touchCount == 1)
+        {
         Touch touch = Input.GetTouch(0);
         Vector3 touchPosition = touch.position;
-        if(touch.phase == TouchPhase.Began)
-            {
-                tapCount++;
-            }
-        if(touch.phase == TouchPhase.Ended)
-            {
-                if (tapCount == 2)
-                {
-                    // Aquí se eliminaría el objeto
-                    Destroy(newObject);
-                    tapCount = 0;
-                }
-            }
+                if (IsMouseOverSquare(touchPosition)) { 
+                
+                    if(touch.phase == TouchPhase.Began)
+                        {
+                            tapCount++;
+                        }
+                    if(touch.phase == TouchPhase.Ended)
+                        {
+                            if (tapCount == 2)
+                            {
+                                // Aquí se eliminaría el objeto
+                                Destroy(newObject);
+                                tapCount = 0;
+                            }
+                        }
+                    }
         }
+   }
 }
-    public void useVoid()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            Vector2 touchPosition = touch.position;
-            switch (touch.phase)
-            {
-                case TouchPhase.Moved:
-                    if (draggedObject != null)
-                    {
-                        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, Camera.main.nearClipPlane));
-                        worldPosition.z = 0;
-                        draggedObject.transform.position = worldPosition;
-                    }
-
-                    // Detectar el swipe
-                    if (Vector2.Distance(touchPosition, swipeStartPos) > 20)
-                    {
-                        isSwiping = true;
-                    }
-                    break;
-
-                case TouchPhase.Ended:
-                    if (isSwiping)
-                    {
-                        CreateTrailEffect(touchPosition);
-                        DeleteAllObjects();
-                    }
-
-                    draggedObject = null;
-                    break;
-            }
-        }
-        void DeleteAllObjects()
-        {
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Victim"))
-            {
-                Destroy(obj);
-            }
-        }
-
-
-        void CreateTrailEffect(Vector2 swipeEndPos)
-        {
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(swipeEndPos.x, swipeEndPos.y, Camera.main.nearClipPlane));
-            worldPosition.z = 0;
-
-            if (trailEffectPrefab != null)
-            {
-                GameObject trailEffect = Instantiate(trailEffectPrefab, worldPosition, Quaternion.identity);
-                TrailRenderer trailRenderer = trailEffect.GetComponent<TrailRenderer>();
-                if (trailRenderer != null)
-                {
-                    trailRenderer.startColor = selectedColor;
-                    trailRenderer.endColor = selectedColor;
-                }
-
-                Destroy(trailEffect, 1f);
-            }
-        }
-    }
     public void DeleteObject(Vector3 touchPosition)
-{
-    // Crear un raycast desde la cámara hacia la posición del toque en el mundo
-    Ray ray = Camera.main.ScreenPointToRay(touchPosition);
-    RaycastHit hit;
-
-    // Verificar si el raycast ha impactado algo en el espacio 3D
-    if (Physics.Raycast(ray, out hit))
     {
-        // Verificar si el objeto impactado tiene un collider
-        if (hit.collider != null)
+        // Crear un raycast desde la cámara hacia la posición del toque en el mundo
+        Ray ray = Camera.main.ScreenPointToRay(touchPosition);
+        RaycastHit hit;
+
+        // Verificar si el raycast ha impactado algo en el espacio 3D
+        if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log("Objeto eliminado: " + hit.collider.gameObject.name);
-            Destroy(hit.collider.gameObject);
+            // Verificar si el objeto impactado tiene un collider
+            if (hit.collider != null)
+            {
+                Debug.Log("Objeto eliminado: " + hit.collider.gameObject.name);
+                Destroy(hit.collider.gameObject);
+            }
+            else
+            {
+                Debug.Log("No se encontró ningún objeto en la posición.");
+            }
         }
         else
         {
             Debug.Log("No se encontró ningún objeto en la posición.");
         }
     }
-    else
-    {
-        Debug.Log("No se encontró ningún objeto en la posición.");
-    }
-}
     bool IsMouseOverSquare(Vector2 position)
     {
         return squareCollider.OverlapPoint(position);
