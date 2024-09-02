@@ -41,6 +41,7 @@ namespace Moviles.Week1
 
         public void InstantiateObject(Vector3 spawnPosition)
         {
+            Debug.Log("wasaa");
             spawnPosition = ScreenToWorldPoint(spawnPosition);
 
             GameObject newObject = Instantiate(objectSPrefab, spawnPosition, Quaternion.identity);
@@ -52,7 +53,6 @@ namespace Moviles.Week1
         public void deleteObject(Vector3 VictimPosition)
         {
 
-            VictimPosition = ScreenToWorldPoint(VictimPosition);
             Ray ray = Camera.main.ScreenPointToRay(VictimPosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, Layer))
