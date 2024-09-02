@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.32644936, g: 0.263849, b: 0.37568524, a: 1}
+  m_IndirectSpecularColor: {r: 0.32604766, g: 0.2634917, b: 0.3754666, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 391.99335, y: 1761.2634}
+  m_AnchoredPosition: {x: 391.99335, y: 1913}
   m_SizeDelta: {x: 3040, y: 1440}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433864165
@@ -380,7 +380,7 @@ MonoBehaviour:
   objectSPrefab: {fileID: 2034500667}
   Layer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 4294967295
 --- !u!1 &532911485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,7 +1232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1180412816}
-  - component: {fileID: 1180412815}
+  - component: {fileID: 1180412817}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -1240,29 +1240,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1180412815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180412814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c35e6a6013f93248b5ca80293a31952, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PanelCharacters: {fileID: 433864164}
-  PanelColors: {fileID: 1907339414}
-  VictimPointPanelCharacters: {x: 391.9933, y: 334.9, z: 812.7219}
-  VictimPointPanelColors: {x: 1368, y: -118.6, z: 0}
-  Personajes:
-  - {fileID: 6377301009434675241}
-  - {fileID: 1746246763402285773}
-  - {fileID: 6415597930264365445}
-  - {fileID: 7164763497867514033}
-  - {fileID: 6989817705730812954}
-  - {fileID: 706270302279028513}
 --- !u!4 &1180412816
 Transform:
   m_ObjectHideFlags: 0
@@ -1278,6 +1255,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1180412817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180412814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4b40cee4ec28541a69bbbc1dbdae33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PanelCharacters: {fileID: 433864164}
+  PanelColors: {fileID: 1907339414}
+  VictimPointPanelCharacters: {x: 391.9933, y: 334.9, z: 812.7219}
+  VictimPointPanelColors: {x: 1347, y: -120, z: 0}
+  Personajes:
+  - {fileID: 6377301009434675241}
+  - {fileID: 1746246763402285773}
+  - {fileID: 6415597930264365445}
+  - {fileID: 7164763497867514033}
+  - {fileID: 6989817705730812954}
+  - {fileID: 706270302279028513}
 --- !u!1 &1263352490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,7 +1287,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1263352492}
-  - component: {fileID: 1263352491}
+  - component: {fileID: 1263352494}
+  - component: {fileID: 1263352493}
   m_Layer: 0
   m_Name: TouchControll
   m_TagString: Untagged
@@ -1295,7 +1296,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1263352491
+--- !u!4 &1263352492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263352490}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1045.5414, y: -179.98883, z: -404.5893}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1263352493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1304,18 +1320,108 @@ MonoBehaviour:
   m_GameObject: {fileID: 1263352490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82fd0eaa5ab0def429273cfad926badb, type: 3}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doubleTapTreshHold: 0.15
+  m_Actions: {fileID: -944628639613478452, guid: 4bb23c1e702296940941be594f7413b6,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1263352494}
+        m_TargetAssemblyTypeName: TouchControl, Assembly-CSharp
+        m_MethodName: OnTapPerformed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2961c314-5289-4be1-a03f-b9fa611b4912
+    m_ActionName: TouchControl/Tap[/Device Simulator Touchscreen/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1263352494}
+        m_TargetAssemblyTypeName: TouchControl, Assembly-CSharp
+        m_MethodName: OnPressPerformed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4068162e-60f5-45e3-9ca0-73e4f7a49cc3
+    m_ActionName: TouchControl/Press[/Device Simulator Touchscreen/press]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1263352494}
+        m_TargetAssemblyTypeName: TouchControl, Assembly-CSharp
+        m_MethodName: OnDragPerformed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 107d4d7d-9c9e-4a94-aa24-c1739afecc75
+    m_ActionName: TouchControl/Drag[/Device Simulator Touchscreen/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1263352494}
+        m_TargetAssemblyTypeName: TouchControl, Assembly-CSharp
+        m_MethodName: OnSwipePerformed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 74608b49-7337-490f-822f-7e800eae4105
+    m_ActionName: TouchControl/Swipe[/Device Simulator Touchscreen/position]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: TouchControl
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1263352494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263352490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16c8c4d3685d124d8905066d9d65796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doubleTapTreshHold: 0.25
   _pressTreshHold: 0.5
-  swipeMinDistance: 550
-  swipeMaxDistance: 700
-  swipeDistanceSqr: 0
-  _minDistance: 0
-  _maxDistance: 0
-  _swipeDistance: 0
-  _swipeTime: 0
+  swipeMinDistance: 50
+  swipeMaxDistance: 500
   OnTap:
     m_PersistentCalls:
       m_Calls:
@@ -1351,7 +1457,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 519290869}
         m_TargetAssemblyTypeName: Moviles.Week1.InteractionController, Assembly-CSharp
-        m_MethodName: MoveObject
+        m_MethodName: SelectObject
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1366,7 +1472,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 519290869}
         m_TargetAssemblyTypeName: Moviles.Week1.InteractionController, Assembly-CSharp
-        m_MethodName: SelectObject
+        m_MethodName: MoveObject
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1379,21 +1485,6 @@ MonoBehaviour:
   OnSwipe:
     m_PersistentCalls:
       m_Calls: []
---- !u!4 &1263352492
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263352490}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1045.5414, y: -179.98883, z: -404.5893}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492445543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,7 +2464,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1734, y: -120}
+  m_AnchoredPosition: {x: 1744, y: -120}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1907339415
@@ -2626,7 +2717,7 @@ Transform:
   m_GameObject: {fileID: 2034500667}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.17, y: 4.21, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

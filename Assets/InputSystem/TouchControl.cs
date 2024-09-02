@@ -159,7 +159,7 @@ public class TouchControl : MonoBehaviour
     private Vector3 GetWorldPositionFromScreen(Vector2 screenPosition)
     {
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
-        Plane plane = new Plane(Vector3.up, Vector3.forward);
+        Plane plane = new Plane(Vector3.up, Vector3.zero);
         float distance;
 
         if (plane.Raycast(ray, out distance))
